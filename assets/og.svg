@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="SOCWatch — Nishen Madawa Abedeera">
+  <defs>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#223047" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#35e0c8" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#0a0e14" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0a0e14"/>
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.5"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <g transform="translate(90,250)">
+    <circle cx="60" cy="60" r="55" fill="none" stroke="#223047" stroke-width="3"/>
+    <circle cx="60" cy="60" r="32" fill="none" stroke="#223047" stroke-width="3"/>
+    <path d="M60 60 L60 5 A55 55 0 0 1 110 48 Z" fill="#35e0c8" opacity="0.25"/>
+    <line x1="60" y1="60" x2="60" y2="5" stroke="#35e0c8" stroke-width="3"/>
+    <circle cx="60" cy="60" r="7" fill="#35e0c8"/>
+  </g>
+
+  <text x="250" y="270" font-family="monospace" font-size="26" fill="#35e0c8">SOC status: monitoring</text>
+  <text x="250" y="345" font-family="system-ui, sans-serif" font-size="72" font-weight="700" fill="#e6edf3">Nishen Madawa Abedeera</text>
+  <text x="250" y="410" font-family="monospace" font-size="34" fill="#35e0c8">The portfolio that watches you back.</text>
+  <text x="250" y="470" font-family="system-ui, sans-serif" font-size="26" fill="#9aa7b8">Cybersecurity &amp; Cloud · blue-team / SOC-minded · AWS Student Builder Challenge</text>
+</svg>

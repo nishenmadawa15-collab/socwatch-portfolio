@@ -1,0 +1,13 @@
+# deps / build (none yet, but just in case)
+node_modules/
+dist/
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# local test output
+docs/screenshots/*.tmp

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Update to the live Amplify URL after deploy (M0 → M5).
+Sitemap: https://TODO-live-url/sitemap.xml
