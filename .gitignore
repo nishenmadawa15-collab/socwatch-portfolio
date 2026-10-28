@@ -11,3 +11,6 @@ Thumbs.db
 
 # local test output
 docs/screenshots/*.tmp
+
+# Claude Code worktrees / local agent data
+.claude/
