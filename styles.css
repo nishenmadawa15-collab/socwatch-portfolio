@@ -335,3 +335,121 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   .nav__dot, .pulse { animation: none; }
 }
+
+/* =======================================================================
+   M1 — advanced visuals
+   ======================================================================= */
+
+/* hero canvas radar sits between the grid and the content */
+.hero__grid { z-index: 0; }
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.hero__inner { z-index: 2; }
+
+/* typing caret */
+.type-caret {
+  display: inline-block;
+  width: 0.6ch;
+  color: var(--accent);
+  animation: caret 1s step-end infinite;
+}
+@keyframes caret { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* ---- scroll reveal ---- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+[data-reveal].is-visible { opacity: 1; transform: none; }
+
+/* ---- skills viz: capability radar + proficiency bars ---- */
+.skills__viz {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) 1fr;
+  gap: clamp(24px, 5vw, 56px);
+  align-items: center;
+  margin-bottom: 44px;
+}
+.radar { margin: 0; text-align: center; }
+.radar svg { width: 100%; height: auto; max-width: 340px; }
+.radar figcaption {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-top: 8px;
+}
+.radar-grid { fill: none; stroke: var(--border); }
+.radar-axis { stroke: var(--border); }
+.radar-area {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  transform-origin: center;
+  transition: transform 0.9s cubic-bezier(.2,.7,.3,1), opacity 0.9s ease;
+}
+.skills__viz:not(.is-visible) .radar-area { transform: scale(0.1); opacity: 0; }
+.radar-dot { fill: var(--accent); }
+.radar-label {
+  fill: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.bar { display: grid; gap: 6px; }
+.bar__label { font-size: 0.88rem; color: var(--text); }
+.bar__track {
+  height: 9px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.bar__fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+  border-radius: 999px;
+  transition: width 1.1s cubic-bezier(.2,.7,.3,1);
+}
+
+/* ---- project architecture mini-diagrams ---- */
+.arch { margin: 4px 0 16px; }
+.arch svg { width: 100%; height: auto; }
+.arch-vpc { fill: none; stroke: var(--accent-dim); stroke-dasharray: 5 4; opacity: 0.8; }
+.arch-box { fill: var(--bg-elev); stroke: var(--border); stroke-width: 1.5; }
+.arch-primary { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
+.arch-label { fill: var(--text); font-family: var(--mono); font-size: 12px; text-anchor: middle; }
+.arch-label--on { fill: var(--text); }
+.arch-sub { fill: var(--text-dim); font-family: var(--mono); font-size: 10px; text-anchor: middle; }
+.arch-tag { fill: var(--text-dim); font-family: var(--mono); font-size: 10px; }
+.arch-flow { fill: var(--accent); font-family: var(--mono); font-size: 10px; text-anchor: middle; }
+.arch-line { stroke: var(--text-dim); stroke-width: 1.5; }
+.arch-line--accent { stroke: var(--accent); stroke-width: 2; }
+
+/* ---- card hover lift ---- */
+.card {
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.card:hover { transform: translateY(-4px); border-color: var(--accent-dim); }
+
+@media (max-width: 720px) {
+  .skills__viz { grid-template-columns: 1fr; }
+  .radar svg { max-width: 300px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .skills__viz:not(.is-visible) .radar-area { transform: none; opacity: 1; }
+  .radar-area, .bar__fill { transition: none; }
+  .type-caret { animation: none; }
+  .card:hover { transform: none; }
+}
