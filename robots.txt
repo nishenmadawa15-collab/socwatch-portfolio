@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Update to the live Amplify URL after deploy (M0 → M5).
-Sitemap: https://TODO-live-url/sitemap.xml
+Sitemap: https://main.d2e99c40tngdmx.amplifyapp.com/sitemap.xml

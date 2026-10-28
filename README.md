@@ -3,7 +3,7 @@
 > **The portfolio that watches you back.**
 > Personal portfolio of **Nishen Madawa Abedeera** — cybersecurity & cloud undergraduate (SLTC Research University, Sri Lanka). Built for the **AWS Student Builder Challenge: Build Your Tech Superpower**.
 
-**Live:** `https://TODO-live-url` (added once Amplify is connected)
+**Live:** https://main.d2e99c40tngdmx.amplifyapp.com
 **Stack:** plain HTML + CSS + vanilla JS · no frameworks, no build step, no CDNs.
 
 ---
