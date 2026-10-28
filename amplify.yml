@@ -10,6 +10,7 @@ frontend:
       - index.html
       - styles.css
       - script.js
+      - hero3d.js
       - config.js
       - robots.txt
       - sitemap.xml
