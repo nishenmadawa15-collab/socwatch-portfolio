@@ -19,6 +19,12 @@ for (const f of ["script.js", "hero3d.js", "config.js"]) {
   const js = fs.readFileSync(path.join(root, f), "utf8");
   if (/setAttribute\(\s*["']style["']/.test(js)) bad.push(`${f}: setAttribute('style')`);
   if (/https?:\/\/[^"'\s]+\.(js|css)\b/.test(js)) bad.push(`${f}: external asset URL`);
+  // ES-module imports must resolve to 'self' (relative path), never a CDN or bare specifier
+  for (const m of js.matchAll(/\bfrom\s*["']([^"']+)["']|\bimport\s*\(\s*["']([^"']+)["']/g)) {
+    const spec = m[1] || m[2];
+    if (!/^\.\.?\//.test(spec)) bad.push(`${f}: non-relative import "${spec}"`);
+    else if (!fs.existsSync(path.join(root, spec))) bad.push(`${f}: missing import target "${spec}"`);
+  }
 }
 
 if (bad.length) {
