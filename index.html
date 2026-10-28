@@ -40,23 +40,32 @@
     <!-- HERO -->
     <section class="hero" id="hero">
       <div class="hero__grid" aria-hidden="true"></div>
-      <canvas class="hero__canvas" id="heroRadar" aria-hidden="true"></canvas>
       <div class="hero__inner">
-        <p class="hero__status"><span class="pulse" aria-hidden="true"></span>SOC status: <strong>monitoring</strong></p>
-        <h1 class="hero__title">Nishen&nbsp;Madava&nbsp;Abedeera</h1>
-        <p class="hero__tagline" id="heroTagline" data-text="The portfolio that watches you back.">The portfolio that watches you back.</p>
-        <p class="hero__sub">
-          BSc (Hons) Cyber Security undergraduate at SLTC · SOC &amp; penetration testing.
-          <strong>TryHackMe Top 1%</strong> globally and 5th nationally at ANIMUS 1.0 CTF.
-          I learn by building real labs and breaking things on purpose.
-        </p>
-        <div class="hero__cta">
-          <a class="btn btn--primary" href="#projects">View projects</a>
-          <a class="btn" href="#contact">Get in touch</a>
+        <div class="hero__copy">
+          <p class="hero__status"><span class="pulse" aria-hidden="true"></span>SOC status: <strong>monitoring</strong></p>
+          <h1 class="hero__title">Nishen Madava Abedeera</h1>
+          <p class="hero__tagline" id="heroTagline" data-text="The portfolio that watches you back.">The portfolio that watches you back.</p>
+          <p class="hero__sub">
+            BSc (Hons) Cyber Security undergraduate at SLTC · SOC &amp; penetration testing.
+            <strong>TryHackMe Top 1%</strong> globally and 5th nationally at ANIMUS 1.0 CTF.
+            I learn by building real labs and breaking things on purpose.
+          </p>
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#projects">View projects</a>
+            <a class="btn" href="#contact">Get in touch</a>
+          </div>
+          <p class="hero__hint" id="terminalHint">
+            Psst — a hidden terminal is coming to this site. For now, try <kbd>View&nbsp;Source</kbd> 👀
+          </p>
         </div>
-        <p class="hero__hint" id="terminalHint">
-          Psst — a hidden terminal is coming to this site. For now, try <kbd>View&nbsp;Source</kbd> 👀
-        </p>
+        <!-- Decorative 3D threat globe (WebGL, hero3d.js). Hidden from AT. -->
+        <div class="hero__scene" id="heroScene" aria-hidden="true">
+          <canvas id="heroGlobe"></canvas>
+          <div class="hero__hud">
+            <span class="hero__hud-item"><span class="pulse"></span>threat map · sim feed</span>
+            <span class="hero__hud-item">48 sensors · 16 flows</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -323,5 +332,6 @@
 
   <script src="config.js"></script>
   <script src="script.js"></script>
+  <script src="hero3d.js"></script>
 </body>
 </html>
