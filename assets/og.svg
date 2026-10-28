@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="SOCWatch — Nishen Madawa Abedeera">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="SOCWatch — Nishen Madava Abedeera">
   <defs>
     <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
       <path d="M48 0H0V48" fill="none" stroke="#223047" stroke-width="1"/>
@@ -21,7 +21,7 @@
   </g>
 
   <text x="250" y="270" font-family="monospace" font-size="26" fill="#35e0c8">SOC status: monitoring</text>
-  <text x="250" y="345" font-family="system-ui, sans-serif" font-size="72" font-weight="700" fill="#e6edf3">Nishen Madawa Abedeera</text>
+  <text x="250" y="345" font-family="system-ui, sans-serif" font-size="72" font-weight="700" fill="#e6edf3">Nishen Madava Abedeera</text>
   <text x="250" y="410" font-family="monospace" font-size="34" fill="#35e0c8">The portfolio that watches you back.</text>
-  <text x="250" y="470" font-family="system-ui, sans-serif" font-size="26" fill="#9aa7b8">Cybersecurity &amp; Cloud · blue-team / SOC-minded · AWS Student Builder Challenge</text>
+  <text x="250" y="470" font-family="system-ui, sans-serif" font-size="26" fill="#9aa7b8">BSc (Hons) Cyber Security · SOC &amp; pen-testing · TryHackMe Top 1%</text>
 </svg>

@@ -1,7 +1,7 @@
 # SOCWatch Portfolio
 
 > **The portfolio that watches you back.**
-> Personal portfolio of **Nishen Madawa Abedeera** — cybersecurity & cloud undergraduate (SLTC Research University, Sri Lanka). Built for the **AWS Student Builder Challenge: Build Your Tech Superpower**.
+> Personal portfolio of **Nishen Madava Abedeera** — BSc (Hons) Cyber Security undergraduate (SLTC Research University, Sri Lanka), SOC & penetration testing. Built for the **AWS Student Builder Challenge: Build Your Tech Superpower**.
 
 **Live:** https://main.d2e99c40tngdmx.amplifyapp.com
 **Stack:** plain HTML + CSS + vanilla JS · no frameworks, no build step, no CDNs.
