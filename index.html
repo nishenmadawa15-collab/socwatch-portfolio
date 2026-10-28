@@ -40,10 +40,11 @@
     <!-- HERO -->
     <section class="hero" id="hero">
       <div class="hero__grid" aria-hidden="true"></div>
+      <canvas class="hero__canvas" id="heroRadar" aria-hidden="true"></canvas>
       <div class="hero__inner">
         <p class="hero__status"><span class="pulse" aria-hidden="true"></span>SOC status: <strong>monitoring</strong></p>
         <h1 class="hero__title">Nishen&nbsp;Madawa&nbsp;Abedeera</h1>
-        <p class="hero__tagline">The portfolio that watches you back.</p>
+        <p class="hero__tagline" id="heroTagline" data-text="The portfolio that watches you back.">The portfolio that watches you back.</p>
         <p class="hero__sub">
           Cybersecurity &amp; Cloud Computing undergraduate · blue-team / SOC-minded student.
           I learn by building real labs, solving CTFs, and shipping secure web.
@@ -60,11 +61,11 @@
 
     <!-- ABOUT -->
     <section class="section" id="about">
-      <div class="section__head">
+      <div class="section__head" data-reveal>
         <span class="section__tag">01 / about</span>
         <h2>About me</h2>
       </div>
-      <div class="about">
+      <div class="about" data-reveal>
         <p>
           I'm Nishen (also Madawa), a BSc undergraduate in <strong>Cybersecurity &amp; Cloud Computing</strong>
           at <strong>Sri Lanka Technological Campus (SLTC) Research University</strong>. My thing is the
@@ -85,11 +86,28 @@
 
     <!-- SKILLS -->
     <section class="section" id="skills">
-      <div class="section__head">
+      <div class="section__head" data-reveal>
         <span class="section__tag">02 / superpowers</span>
         <h2>Tech superpowers</h2>
       </div>
-      <div class="skills">
+
+      <div class="skills__viz" data-reveal>
+        <figure class="radar">
+          <svg id="capabilityRadar" viewBox="0 0 320 300" role="img"
+               aria-label="Capability radar: SOC/SIEM, Cloud/AWS, Linux, Networking, Web dev, CTF/Forensics"></svg>
+          <figcaption>Capability radar — self-assessed, honestly mid-level and climbing.</figcaption>
+        </figure>
+        <ul class="bars" aria-label="Proficiency levels">
+          <li class="bar"><span class="bar__label">SOC &amp; SIEM (Wazuh)</span><span class="bar__track"><span class="bar__fill" data-value="80"></span></span></li>
+          <li class="bar"><span class="bar__label">AWS &amp; Cloud</span><span class="bar__track"><span class="bar__fill" data-value="85"></span></span></li>
+          <li class="bar"><span class="bar__label">Linux &amp; Bash</span><span class="bar__track"><span class="bar__fill" data-value="75"></span></span></li>
+          <li class="bar"><span class="bar__label">Networking</span><span class="bar__track"><span class="bar__fill" data-value="70"></span></span></li>
+          <li class="bar"><span class="bar__label">Web dev (HTML/CSS/JS)</span><span class="bar__track"><span class="bar__fill" data-value="70"></span></span></li>
+          <li class="bar"><span class="bar__label">CTF &amp; forensics</span><span class="bar__track"><span class="bar__fill" data-value="65"></span></span></li>
+        </ul>
+      </div>
+
+      <div class="skills" data-reveal>
         <article class="card">
           <h3>🛡️ Security</h3>
           <ul>
@@ -121,18 +139,38 @@
 
     <!-- PROJECTS -->
     <section class="section" id="projects">
-      <div class="section__head">
+      <div class="section__head" data-reveal>
         <span class="section__tag">03 / projects</span>
         <h2>Projects &amp; achievements</h2>
       </div>
       <div class="projects">
 
-        <article class="card project">
+        <article class="card project" data-reveal>
           <div class="project__meta">
             <span class="badge badge--live">Lab</span>
             <span class="project__stack">AWS · Wazuh · Linux</span>
           </div>
           <h3>SOCWatch Lab — Wazuh SOC on AWS</h3>
+          <figure class="arch">
+            <svg viewBox="0 0 400 160" role="img" aria-label="Architecture: a VPC containing a Wazuh manager on EC2, with Linux and Windows agents sending logs, and an Elastic IP.">
+              <rect class="arch-vpc" x="8" y="22" width="384" height="128" rx="8"/>
+              <text class="arch-tag" x="18" y="38">VPC · 10.0.0.0/16</text>
+              <rect class="arch-box" x="28" y="52" width="86" height="30" rx="5"/>
+              <text class="arch-label" x="71" y="71">Linux agent</text>
+              <rect class="arch-box" x="28" y="98" width="86" height="30" rx="5"/>
+              <text class="arch-label" x="71" y="117">Windows agent</text>
+              <rect class="arch-box arch-primary" x="160" y="68" width="96" height="44" rx="6"/>
+              <text class="arch-label arch-label--on" x="208" y="86">EC2</text>
+              <text class="arch-sub arch-label--on" x="208" y="102">Wazuh mgr</text>
+              <rect class="arch-box" x="302" y="68" width="78" height="44" rx="6"/>
+              <text class="arch-label" x="341" y="88">Elastic</text>
+              <text class="arch-label" x="341" y="103">IP</text>
+              <line class="arch-line" x1="114" y1="67" x2="158" y2="84"/>
+              <line class="arch-line" x1="114" y1="113" x2="158" y2="96"/>
+              <line class="arch-line arch-line--accent" x1="256" y1="90" x2="300" y2="90"/>
+              <text class="arch-flow" x="130" y="58">logs</text>
+            </svg>
+          </figure>
           <p>
             A working Security Operations Center in the cloud: a custom VPC, the Wazuh manager on EC2,
             Linux + Windows agents, an Elastic IP, log collection, alert triage and file-integrity
@@ -144,12 +182,29 @@
           </p>
         </article>
 
-        <article class="card project">
+        <article class="card project" data-reveal>
           <div class="project__meta">
             <span class="badge badge--building">Building</span>
             <span class="project__stack">Amplify · Lambda · DynamoDB</span>
           </div>
           <h3>SOCWatch Portfolio — this site</h3>
+          <figure class="arch">
+            <svg viewBox="0 0 400 160" role="img" aria-label="Architecture: a visitor's browser reaches AWS Amplify hosting; the static site calls a Lambda Function URL which reads and writes a DynamoDB table.">
+              <rect class="arch-box" x="10" y="60" width="80" height="40" rx="6"/>
+              <text class="arch-label" x="50" y="84">Visitor</text>
+              <rect class="arch-box arch-primary" x="128" y="60" width="96" height="40" rx="6"/>
+              <text class="arch-label arch-label--on" x="176" y="79">AWS Amplify</text>
+              <text class="arch-sub arch-label--on" x="176" y="93">static + CI/CD</text>
+              <rect class="arch-box" x="268" y="20" width="118" height="40" rx="6"/>
+              <text class="arch-label" x="327" y="44">Lambda URL</text>
+              <rect class="arch-box" x="268" y="100" width="118" height="40" rx="6"/>
+              <text class="arch-label" x="327" y="124">DynamoDB</text>
+              <line class="arch-line" x1="90" y1="80" x2="126" y2="80"/>
+              <line class="arch-line arch-line--accent" x1="224" y1="76" x2="266" y2="48"/>
+              <line class="arch-line arch-line--accent" x1="224" y1="84" x2="266" y2="116"/>
+              <text class="arch-flow" x="232" y="36">GET/POST</text>
+            </svg>
+          </figure>
           <p>
             The site you're on. Hosted on AWS Amplify with strict security headers. Over the next few days
             it gains a hidden terminal, a live SOC alert feed that reacts to your actions, and a mini-CTF
@@ -158,7 +213,7 @@
           <p class="project__lesson"><strong>Status:</strong> live from day one, built in the open.</p>
         </article>
 
-        <article class="card project project--todo">
+        <article class="card project project--todo" data-reveal>
           <div class="project__meta">
             <span class="badge">CTF log</span>
             <span class="project__stack">Web · OSINT · Forensics · Crypto</span>
@@ -174,11 +229,11 @@
 
     <!-- CONTACT -->
     <section class="section" id="contact">
-      <div class="section__head">
+      <div class="section__head" data-reveal>
         <span class="section__tag">04 / contact</span>
         <h2>Get in touch</h2>
       </div>
-      <div class="contact">
+      <div class="contact" data-reveal>
         <p>Open to security internships, collaboration and good CTF teams.</p>
         <ul class="contact__links">
           <li><a href="mailto:nishenmadawa15@gmail.com">nishenmadawa15@gmail.com</a></li>
