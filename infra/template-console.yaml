@@ -54,6 +54,9 @@ Resources:
       Architectures: [arm64]
       Timeout: 5
       MemorySize: 128
+      # Cap concurrency so an unauthenticated flood on the public Function URL
+      # can't scale Lambda + DynamoDB spend or grow the table unbounded (F1).
+      ReservedConcurrentExecutions: 5
       Role: !GetAtt CtfRole.Arn
       Environment:
         Variables:

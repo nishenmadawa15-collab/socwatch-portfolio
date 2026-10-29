@@ -37,6 +37,9 @@ Resources:
       FunctionName: socwatch-ctf
       Handler: handler.handler
       CodeUri: ctf/
+      # Cap concurrency so an unauthenticated flood on the public Function URL
+      # can't scale Lambda + DynamoDB spend or grow the table unbounded (F1).
+      ReservedConcurrentExecutions: 5
       Environment:
         Variables:
           TABLE_NAME: !Ref ScoresTable
