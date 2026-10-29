@@ -37,9 +37,12 @@ Resources:
       FunctionName: socwatch-ctf
       Handler: handler.handler
       CodeUri: ctf/
-      # Cap concurrency so an unauthenticated flood on the public Function URL
-      # can't scale Lambda + DynamoDB spend or grow the table unbounded (F1).
-      ReservedConcurrentExecutions: 5
+      # F1 (cost/DoS) note: an explicit ReservedConcurrentExecutions cap is
+      # omitted because a low account Lambda concurrency ceiling already bounds
+      # max concurrency (reserving there fails with "decreases
+      # UnreservedConcurrentExecution below its minimum"). That ceiling plus the
+      # $10 AWS Budget alert and PAY_PER_REQUEST billing bound the blast radius.
+      # On an account with a raised limit, add: ReservedConcurrentExecutions: 5
       Environment:
         Variables:
           TABLE_NAME: !Ref ScoresTable
