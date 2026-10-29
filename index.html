@@ -28,6 +28,7 @@
       <a href="#about">About</a>
       <a href="#skills">Superpowers</a>
       <a href="#projects">Projects</a>
+      <a href="#soc">Live feed</a>
       <a href="#contact">Contact</a>
     </nav>
     <button class="nav__theme" id="themeToggle" type="button" aria-label="Toggle colour theme">
@@ -296,10 +297,56 @@
       </div>
     </section>
 
+    <!-- LIVE SOC FEED (Layer A) -->
+    <section class="section" id="soc">
+      <div class="section__head" data-reveal>
+        <span class="section__tag">04 / live feed</span>
+        <h2>SOC console — live</h2>
+      </div>
+      <div class="soc" data-reveal>
+        <div class="soc__top">
+          <div class="soc__counters" role="group" aria-label="Filter alerts by severity">
+            <button class="soc__count soc__count--all is-active" type="button" data-sev="all" aria-pressed="true">
+              <span class="soc__count-n" data-count="all">0</span>
+              <span class="soc__count-l">all</span>
+            </button>
+            <button class="soc__count soc__count--high" type="button" data-sev="high" aria-pressed="false">
+              <span class="soc__count-n" data-count="high">0</span>
+              <span class="soc__count-l">high</span>
+            </button>
+            <button class="soc__count soc__count--warn" type="button" data-sev="warn" aria-pressed="false">
+              <span class="soc__count-n" data-count="warn">0</span>
+              <span class="soc__count-l">warn</span>
+            </button>
+            <button class="soc__count soc__count--low" type="button" data-sev="low" aria-pressed="false">
+              <span class="soc__count-n" data-count="low">0</span>
+              <span class="soc__count-l">low</span>
+            </button>
+            <button class="soc__count soc__count--info" type="button" data-sev="info" aria-pressed="false">
+              <span class="soc__count-n" data-count="info">0</span>
+              <span class="soc__count-l">info</span>
+            </button>
+          </div>
+          <figure class="soc__spark">
+            <svg id="socSpark" viewBox="0 0 240 48" role="img" aria-label="Alert volume over recent time"></svg>
+            <figcaption>
+              <span class="soc__live"><span class="pulse" aria-hidden="true"></span>live</span>
+              · simulated SOC feed
+            </figcaption>
+          </figure>
+        </div>
+        <ol class="soc__list" id="socList" aria-live="polite" aria-label="Live alert feed"></ol>
+        <p class="soc__note">
+          A friendly simulation: it reacts to what you do on this page, but nothing is sent anywhere.
+          The real backend-powered scoreboard arrives with the mini-CTF.
+        </p>
+      </div>
+    </section>
+
     <!-- CONTACT -->
     <section class="section" id="contact">
       <div class="section__head" data-reveal>
-        <span class="section__tag">04 / contact</span>
+        <span class="section__tag">05 / contact</span>
         <h2>Get in touch</h2>
       </div>
       <div class="contact" data-reveal>
@@ -359,6 +406,7 @@
   <script src="config.js"></script>
   <script src="script.js"></script>
   <script src="terminal.js"></script>
+  <script src="feed.js"></script>
   <script type="module" src="hero3d.js"></script>
 </body>
 </html>

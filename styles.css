@@ -762,3 +762,126 @@ body.term-open { overflow: hidden; }
   .term { padding: 0; }
   .term__window { width: 100vw; max-height: 100vh; height: 100%; border-radius: 0; border: 0; }
 }
+
+/* =======================================================================
+   M3 — live SOC alert feed (Layer A). Markup in index.html, logic in feed.js.
+   Front-end-only simulation; backend scoreboard arrives in M4.
+   ======================================================================= */
+.soc {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.soc__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px clamp(14px, 3vw, 22px);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-elev) 60%, transparent);
+}
+
+/* severity counters double as filter chips */
+.soc__counters { display: flex; flex-wrap: wrap; gap: 8px; }
+.soc__count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 12px;
+  min-height: 32px;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.soc__count:hover { color: var(--text); border-color: var(--accent); }
+.soc__count-n { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+.soc__count-l { text-transform: uppercase; letter-spacing: 0.5px; }
+.soc__count--high .soc__count-n { color: var(--sev-high); }
+.soc__count--warn .soc__count-n { color: var(--sev-warn); }
+.soc__count--low  .soc__count-n { color: var(--accent); }
+.soc__count.is-active { border-color: var(--accent); color: var(--text); background: var(--accent-soft); }
+
+/* sparkline */
+.soc__spark { margin: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.soc__spark svg { width: 240px; max-width: 46vw; height: 48px; display: block; }
+.soc__spark figcaption {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.soc__live { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; }
+.soc__live .pulse { width: 7px; height: 7px; }
+.soc__spark-area { fill: var(--accent-soft); stroke: none; }
+.soc__spark-line { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.soc__spark-dot { fill: var(--accent); }
+
+/* feed list */
+.soc__list {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+  max-height: 340px;
+  overflow-y: auto;
+}
+.soc__row {
+  display: grid;
+  grid-template-columns: auto auto auto 1fr;
+  align-items: baseline;
+  gap: 12px;
+  padding: 7px clamp(14px, 3vw, 22px);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+.soc__row.is-hidden { display: none; }
+.soc__row--in { animation: soc-in var(--dur-med) var(--ease-out); }
+@keyframes soc-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+.soc__t { color: var(--text-dim); }
+.soc__sev {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.68rem;
+  padding: 1px 7px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.soc__sev--high { color: var(--sev-high); border-color: var(--sev-high); }
+.soc__sev--warn { color: var(--sev-warn); border-color: var(--sev-warn); }
+.soc__sev--low  { color: var(--accent); border-color: var(--accent-dim); }
+.soc__sev--info { color: var(--text-dim); }
+.soc__src { color: var(--text-dim); }
+.soc__src::before { content: "["; }
+.soc__src::after { content: "]"; }
+.soc__msg { color: var(--text); word-break: break-word; }
+.soc__row--high .soc__msg { color: var(--text); }
+.soc__note {
+  margin: 0;
+  padding: 12px clamp(14px, 3vw, 22px) 16px;
+  border-top: 1px solid var(--border);
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+@media (max-width: 560px) {
+  .soc__spark { align-items: flex-start; }
+  .soc__spark svg { max-width: 92vw; width: 100%; }
+  .soc__row { grid-template-columns: auto auto 1fr; }
+  .soc__src { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .soc__row--in { animation: none; }
+}

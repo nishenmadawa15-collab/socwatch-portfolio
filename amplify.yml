@@ -11,6 +11,7 @@ frontend:
       - styles.css
       - script.js
       - terminal.js
+      - feed.js
       - hero3d.js
       - config.js
       - robots.txt
