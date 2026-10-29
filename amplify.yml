@@ -12,6 +12,7 @@ frontend:
       - script.js
       - terminal.js
       - feed.js
+      - scoreboard.js
       - hero3d.js
       - config.js
       - robots.txt

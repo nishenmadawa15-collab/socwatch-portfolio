@@ -3,6 +3,11 @@ node_modules/
 dist/
 *.log
 
+# AWS SAM build/deploy artifacts (infra/)
+.aws-sam/
+samconfig.toml
+packaged.yaml
+
 # OS / editor
 .DS_Store
 Thumbs.db

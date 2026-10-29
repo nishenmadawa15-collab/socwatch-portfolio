@@ -885,3 +885,76 @@ body.term-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .soc__row--in { animation: none; }
 }
+
+/* =======================================================================
+   M4 — mini-CTF scoreboard (Layer C). Markup in index.html, logic in
+   scoreboard.js; backend is infra/ (Lambda Function URL + DynamoDB).
+   ======================================================================= */
+.ctf__intro { max-width: 70ch; color: var(--text-dim); }
+.ctf__intro strong { color: var(--accent); }
+
+.ctf__form {
+  margin: 20px 0 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+.ctf__fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+}
+.ctf__field { display: grid; gap: 6px; flex: 1 1 160px; }
+.ctf__field--wide { flex: 2 1 240px; }
+.ctf__field span {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.ctf__field input {
+  font: inherit;
+  font-family: var(--mono);
+  color: var(--text);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  min-height: 44px;
+}
+.ctf__field input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.ctf__form .btn { flex: 0 0 auto; }
+.ctf__form .btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+.ctf__msg { margin: 12px 0 0; font-family: var(--mono); font-size: 0.85rem; min-height: 1.2em; }
+.ctf__msg--err { color: var(--sev-high); }
+.ctf__msg--ok { color: var(--accent); }
+.ctf__msg--muted { color: var(--text-dim); }
+
+.ctf__board-wrap { overflow-x: auto; }
+.ctf__board {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 0.88rem;
+}
+.ctf__board[hidden] { display: none; }
+.ctf__board th, .ctf__board td {
+  text-align: left;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.ctf__board th {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+.ctf__board td:first-child, .ctf__board th:first-child { color: var(--text-dim); width: 2.5em; }
+.ctf__board td:last-child, .ctf__board th:last-child { text-align: right; color: var(--accent); font-weight: 700; }
+.ctf__board tr.is-me td { background: var(--accent-soft); }
+.ctf__empty { color: var(--text-dim); font-family: var(--mono); font-size: 0.85rem; }
+.ctf__empty[hidden] { display: none; }

@@ -1,0 +1,65 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-09
+Description: >
+  SOCWatch mini-CTF backend (M4) — a Lambda Function URL + DynamoDB scoreboard.
+  Validates CTF flags server-side, stores per-handle scores, returns a
+  leaderboard. Deploy with AWS SAM (see infra/README.md). Region: ap-south-1.
+
+Parameters:
+  AllowOrigin:
+    Type: String
+    Default: https://main.d2e99c40tngdmx.amplifyapp.com
+    Description: Browser origin allowed to call the Function URL (the live site).
+
+Globals:
+  Function:
+    Timeout: 5
+    MemorySize: 128
+    Runtime: nodejs20.x
+    Architectures: [arm64]
+
+Resources:
+  ScoresTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: SOCWatchScores
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: handle
+          AttributeType: S
+      KeySchema:
+        - AttributeName: handle
+          KeyType: HASH
+
+  CtfFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: socwatch-ctf
+      Handler: handler.handler
+      CodeUri: ctf/
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref ScoresTable
+          ALLOW_ORIGIN: !Ref AllowOrigin
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ScoresTable
+      FunctionUrlConfig:
+        AuthType: NONE
+        Cors:
+          AllowOrigins:
+            - !Ref AllowOrigin
+          AllowMethods:
+            - GET
+            - POST
+          AllowHeaders:
+            - content-type
+          MaxAge: 300
+
+Outputs:
+  FunctionUrl:
+    Description: Paste this into config.js (backendUrl) and append it to customHttp.yml connect-src.
+    Value: !GetAtt CtfFunctionUrl.FunctionUrl
+  TableName:
+    Description: DynamoDB scoreboard table.
+    Value: !Ref ScoresTable

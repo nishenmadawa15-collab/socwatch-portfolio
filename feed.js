@@ -163,9 +163,18 @@
 
   /* ---------------- visitor reactions ---------------- */
   // terminal (and anything else) can push alerts through this event
+  var flag3Shown = false;
   document.addEventListener("socwatch:alert", function (e) {
     var d = e.detail || {};
     addAlert(d.sev || "info", d.source || "ui", d.msg || "event");
+    // flag 3 is EARNED: provoke a high-severity alert from the terminal
+    // (e.g. `cat .secret` or `sudo`) and the SOC escalates — revealing it here.
+    if (!flag3Shown && d.source === "terminal" && d.sev === "high") {
+      flag3Shown = true;
+      setTimeout(function () {
+        addAlert("high", "ctf", "Access escalated — FLAG{the_soc_sees_everything} — submit it on the scoreboard");
+      }, 700);
+    }
   });
 
   // theme changes

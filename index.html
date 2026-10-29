@@ -29,6 +29,7 @@
       <a href="#skills">Superpowers</a>
       <a href="#projects">Projects</a>
       <a href="#soc">Live feed</a>
+      <a href="#ctf">CTF</a>
       <a href="#contact">Contact</a>
     </nav>
     <button class="nav__theme" id="themeToggle" type="button" aria-label="Toggle colour theme">
@@ -245,9 +246,9 @@
             </svg>
           </figure>
           <p>
-            The site you're on. Hosted on AWS Amplify with strict security headers. Over the next few days
-            it gains a hidden terminal, a live SOC alert feed that reacts to your actions, and a mini-CTF
-            backed by Lambda + DynamoDB with a public Blue-Team scoreboard.
+            The site you're on. Hosted on AWS Amplify with strict security headers. It has a hidden
+            terminal (press <kbd>~</kbd>), a live SOC alert feed that reacts to your actions, and a
+            mini-CTF — three hidden flags scored by a Lambda + DynamoDB Blue-Team scoreboard.
           </p>
           <p class="project__lesson"><strong>Status:</strong> live from day one, built in the open.</p>
         </article>
@@ -343,10 +344,48 @@
       </div>
     </section>
 
+    <!-- CAPTURE THE FLAG (Layer C) -->
+    <section class="section" id="ctf">
+      <div class="section__head" data-reveal>
+        <span class="section__tag">05 / capture the flag</span>
+        <h2>Blue-Team scoreboard</h2>
+      </div>
+      <div class="ctf" data-reveal>
+        <p class="ctf__intro">
+          Three flags are hidden across this site — one in the <strong>source</strong>, one in the
+          hidden <strong>terminal</strong>, one earned from the <strong>live feed</strong>. Find them,
+          submit them, climb the board. Scores are validated and ranked by a Lambda + DynamoDB backend.
+        </p>
+        <form class="ctf__form" id="ctfForm" autocomplete="off">
+          <div class="ctf__fields">
+            <label class="ctf__field">
+              <span>Handle</span>
+              <input id="ctfHandle" type="text" maxlength="24" placeholder="VoidInjector" required>
+            </label>
+            <label class="ctf__field ctf__field--wide">
+              <span>Flag</span>
+              <input id="ctfFlag" type="text" placeholder="FLAG{…}" required spellcheck="false" autocapitalize="off">
+            </label>
+            <button class="btn btn--primary" type="submit" id="ctfSubmit">Submit flag</button>
+          </div>
+          <p class="ctf__msg" id="ctfMsg" role="status" aria-live="polite"></p>
+        </form>
+        <div class="ctf__board-wrap">
+          <table class="ctf__board" id="ctfBoard" aria-label="CTF leaderboard">
+            <thead>
+              <tr><th scope="col">#</th><th scope="col">handle</th><th scope="col">flags</th><th scope="col">score</th></tr>
+            </thead>
+            <tbody id="ctfBody"></tbody>
+          </table>
+          <p class="ctf__empty" id="ctfEmpty">Scoreboard offline — backend awaiting deploy. The flags are already live; keep hunting.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- CONTACT -->
     <section class="section" id="contact">
       <div class="section__head" data-reveal>
-        <span class="section__tag">05 / contact</span>
+        <span class="section__tag">06 / contact</span>
         <h2>Get in touch</h2>
       </div>
       <div class="contact" data-reveal>
@@ -407,6 +446,7 @@
   <script src="script.js"></script>
   <script src="terminal.js"></script>
   <script src="feed.js"></script>
+  <script src="scoreboard.js"></script>
   <script type="module" src="hero3d.js"></script>
 </body>
 </html>
