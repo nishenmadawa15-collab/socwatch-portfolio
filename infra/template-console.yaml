@@ -1,0 +1,126 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  SOCWatch mini-CTF backend (M4) - console-deployable plain CloudFormation.
+  DynamoDB + Lambda (inline code) + a public Function URL, in one upload. No
+  SAM CLI and no local AWS credentials needed - deploy it from the AWS console
+  you are already signed into. Region: ap-south-1. (infra/template.yaml is the
+  equivalent SAM version for CLI deploys.)
+
+Parameters:
+  AllowOrigin:
+    Type: String
+    Default: https://main.d2e99c40tngdmx.amplifyapp.com
+    Description: Browser origin allowed to call the Function URL (the live site).
+
+Resources:
+  ScoresTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: SOCWatchScores
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: handle
+          AttributeType: S
+      KeySchema:
+        - AttributeName: handle
+          KeyType: HASH
+
+  CtfRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: { Service: lambda.amazonaws.com }
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: scores-crud
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: [dynamodb:GetItem, dynamodb:PutItem, dynamodb:Scan]
+                Resource: !GetAtt ScoresTable.Arn
+
+  CtfFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: socwatch-ctf
+      Runtime: nodejs20.x
+      Handler: index.handler
+      Architectures: [arm64]
+      Timeout: 5
+      MemorySize: 128
+      Role: !GetAtt CtfRole.Arn
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref ScoresTable
+      Code:
+        ZipFile: |
+          const {DynamoDBClient}=require("@aws-sdk/client-dynamodb");
+          const {DynamoDBDocumentClient,GetCommand,PutCommand,ScanCommand}=require("@aws-sdk/lib-dynamodb");
+          const {createHash}=require("crypto");
+          const ddb=DynamoDBDocumentClient.from(new DynamoDBClient({}));
+          const TABLE=process.env.TABLE_NAME;
+          const FLAGS={
+          "ae266af07bf9b62007d093ab49b6929170238bbed2c315adf553c5aa59576cc3":{id:"recon",points:100},
+          "d32db1d4ad69dee7eaa908b6eaee0b444e79c76ce5bac6849f944fa4ae00371a":{id:"terminal",points:150},
+          "bee52e0c0e3850df347543108a8821337d1be5631672225cbe765d04f66df8d3":{id:"feed",points:250}};
+          const dg=s=>createHash("sha256").update(s).digest("hex");
+          const J=(s,b)=>({statusCode:s,headers:{"content-type":"application/json"},body:JSON.stringify(b)});
+          const ch=h=>typeof h==="string"?h.trim().slice(0,24).replace(/[^\w .\-]/g,""):"";
+          async function board(){
+           const o=await ddb.send(new ScanCommand({TableName:TABLE}));
+           return (o.Items||[]).map(i=>({handle:i.handle,score:Number(i.score)||0,solved:Array.isArray(i.solved)?i.solved:[],updatedAt:i.updatedAt||null})).sort((a,b)=>b.score-a.score||(a.updatedAt<b.updatedAt?-1:1));
+          }
+          exports.handler=async(e)=>{
+           const m=(e&&e.requestContext&&e.requestContext.http&&e.requestContext.http.method)||(e&&e.body!==undefined?"POST":"GET");
+           try{
+            if(m==="GET"){const r=await board();return J(200,{ok:true,total:r.length,scoreboard:r.slice(0,20)});}
+            if(m==="POST"){
+             let p={};try{p=JSON.parse(e.body||"{}");}catch(x){return J(400,{ok:false,error:"invalid JSON body"});}
+             const h=ch(p.handle),f=typeof p.flag==="string"?p.flag.trim():"";
+             if(!h||h.length<2)return J(400,{ok:false,error:"pick a handle (2-24 chars)"});
+             const mt=f?FLAGS[dg(f)]:null;
+             if(!mt)return J(200,{ok:false,error:"flag not recognised - keep hunting"});
+             const ex=(await ddb.send(new GetCommand({TableName:TABLE,Key:{handle:h}}))).Item;
+             const sv=new Set((ex&&ex.solved)||[]);const al=sv.has(mt.id);if(!al)sv.add(mt.id);
+             let sc=Number(ex&&ex.score)||0;if(!al)sc+=mt.points;
+             const it={handle:h,score:sc,solved:[...sv],updatedAt:new Date().toISOString()};
+             await ddb.send(new PutCommand({TableName:TABLE,Item:it}));
+             const r=await board();const rk=r.findIndex(x=>x.handle===h);
+             return J(200,{ok:true,already:al,id:mt.id,awarded:al?0:mt.points,score:sc,solved:it.solved,rank:rk===-1?null:rk+1,total:r.length,message:al?("already captured ["+mt.id+"]"):("+"+mt.points+" for ["+mt.id+"]")});
+            }
+            return J(405,{ok:false,error:"method not allowed"});
+           }catch(err){console.error(err);return J(500,{ok:false,error:"internal error"});}
+          };
+
+  CtfUrl:
+    Type: AWS::Lambda::Url
+    Properties:
+      TargetFunctionArn: !GetAtt CtfFunction.Arn
+      AuthType: NONE
+      Cors:
+        AllowOrigins: [!Ref AllowOrigin]
+        AllowMethods: [GET, POST]
+        AllowHeaders: [content-type]
+        MaxAge: 300
+
+  CtfUrlPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref CtfFunction
+      Action: lambda:InvokeFunctionUrl
+      Principal: "*"
+      FunctionUrlAuthType: NONE
+
+Outputs:
+  FunctionUrl:
+    Description: Paste into config.js (backendUrl) and append to customHttp.yml connect-src.
+    Value: !GetAtt CtfUrl.FunctionUrl
+  TableName:
+    Description: DynamoDB scoreboard table.
+    Value: !Ref ScoresTable

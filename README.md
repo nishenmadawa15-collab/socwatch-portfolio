@@ -50,7 +50,7 @@ Front-end files: `index.html`, `styles.css`, `script.js` (base UI), `terminal.js
 
 ## Deploy
 - **Hosting:** Amplify watches this repo's `main`; every push auto-deploys. Config in [`amplify.yml`](amplify.yml) + [`customHttp.yml`](customHttp.yml). Any new root JS file must be added to `amplify.yml`'s artifact list or it 404s live.
-- **Backend:** one SAM/CloudFormation template, [`infra/template.yaml`](infra/template.yaml). Full deploy + wiring steps in [`infra/README.md`](infra/README.md).
+- **Backend:** one CloudFormation template — [`infra/template.yaml`](infra/template.yaml) (SAM/CLI) or [`infra/template-console.yaml`](infra/template-console.yaml) (console, one upload, no CLI). Steps: [`infra/README.md`](infra/README.md) / [`docs/DEPLOY-CONSOLE.md`](docs/DEPLOY-CONSOLE.md).
 
 ## License
 MIT — see [`LICENSE`](LICENSE).

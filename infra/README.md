@@ -26,7 +26,15 @@ themselves are hidden on the site (index.html comment, `terminal.js`,
 node -e 'console.log(require("crypto").createHash("sha256").update("FLAG{...}").digest("hex"))'
 ```
 
-## Deploy (you run this — Claude can't sign in to AWS)
+## No SAM CLI? Deploy from the console
+
+If you don't have the SAM CLI (or local AWS credentials), use the plain
+CloudFormation version [`template-console.yaml`](./template-console.yaml) — it
+inlines the Lambda code so the whole stack deploys in one console upload. Steps:
+[`docs/DEPLOY-CONSOLE.md`](../docs/DEPLOY-CONSOLE.md). The SAM path below is the
+CLI alternative.
+
+## Deploy with SAM (you run this — Claude can't sign in to AWS)
 
 Prereqs: **AWS SAM CLI** (`sam --version`) and credentials for the
 `socwatch-admin` user (`aws sts get-caller-identity` should return account
