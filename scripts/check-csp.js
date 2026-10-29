@@ -15,7 +15,7 @@ if (/<style[\s>]/i.test(html)) bad.push("inline <style>");
 if (/\sstyle\s*=/i.test(html)) bad.push('style="" attribute');
 if (/<(script|link)[^>]+(src|href)\s*=\s*["']?(https?:)?\/\//i.test(html)) bad.push("external script/stylesheet");
 
-for (const f of ["script.js", "terminal.js", "hero3d.js", "config.js"]) {
+for (const f of ["script.js", "terminal.js", "feed.js", "hero3d.js", "config.js"]) {
   const js = fs.readFileSync(path.join(root, f), "utf8");
   if (/setAttribute\(\s*["']style["']/.test(js)) bad.push(`${f}: setAttribute('style')`);
   if (/https?:\/\/[^"'\s]+\.(js|css)\b/.test(js)) bad.push(`${f}: external asset URL`);

@@ -54,6 +54,12 @@
   }
   function scrollDown() { screenEl.scrollTop = screenEl.scrollHeight; }
 
+  // notify the live SOC feed (Layer A); no-op if the feed isn't present
+  function signal(sev, msg) {
+    document.dispatchEvent(new CustomEvent("socwatch:alert",
+      { detail: { sev: sev, source: "terminal", msg: msg } }));
+  }
+
   var PS1 = "visitor@socwatch:~$";
 
   /* ---------------- virtual files ---------------- */
@@ -211,8 +217,12 @@
       if (commands.hasOwnProperty(name)) {
         try { commands[name](args); }
         catch (e) { print("internal error running '" + name + "'.", "err"); }
+        if (name === "cat" && args[0] === ".secret") signal("high", "Classified file accessed: .secret");
+        else if (name === "sudo") signal("warn", "Privilege escalation attempt (sudo) — denied");
+        else signal("low", "Command executed: " + name);
       } else {
         print(name + ": command not found. type 'help'.", "err");
+        signal("info", "Unknown command entered: " + name);
       }
     }
     histIdx = history.length;
@@ -272,6 +282,7 @@
     if (!output.childElementCount) greet();
     input.focus();
     scrollDown();
+    signal("warn", "Interactive terminal launched by visitor");
   }
   function close() {
     if (term.hidden) return;
