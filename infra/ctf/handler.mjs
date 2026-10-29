@@ -3,18 +3,22 @@
    Flags are validated here (server-side source of truth) so the browser never
    decides who scored. Zero dependencies — AWS SDK v3 ships with nodejs20.x.
    CORS is handled by the Function URL's own Cors config, not in this code. */
+import { createHash } from "node:crypto";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 
 const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({}));
 const TABLE = process.env.TABLE_NAME;
 
-/* flag -> { id, points }. Keep in sync with the three flags hidden on the site. */
+/* SHA-256(flag) -> { id, points }. Plaintext flags never live in this code —
+   only their digests — so reading the Lambda source doesn't hand out the flags.
+   The flags themselves are findable on the site (source / terminal / feed). */
 const FLAGS = {
-  "FLAG{welcome_to_the_soc}":        { id: "recon",    points: 100 },
-  "FLAG{deeper_than_view_source}":   { id: "terminal", points: 150 },
-  "FLAG{the_soc_sees_everything}":   { id: "feed",     points: 250 }
+  "ae266af07bf9b62007d093ab49b6929170238bbed2c315adf553c5aa59576cc3": { id: "recon",    points: 100 },
+  "d32db1d4ad69dee7eaa908b6eaee0b444e79c76ce5bac6849f944fa4ae00371a": { id: "terminal", points: 150 },
+  "bee52e0c0e3850df347543108a8821337d1be5631672225cbe765d04f66df8d3": { id: "feed",     points: 250 }
 };
+const digest = (s) => createHash("sha256").update(s).digest("hex");
 
 const json = (status, body) => ({
   statusCode: status,
@@ -65,7 +69,7 @@ export const handler = async (event) => {
         return json(400, { ok: false, error: "pick a handle (2-24 chars)" });
       }
 
-      const match = FLAGS[flag];
+      const match = flag ? FLAGS[digest(flag)] : null;
       if (!match) {
         return json(200, { ok: false, error: "flag not recognised — keep hunting" });
       }

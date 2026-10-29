@@ -336,7 +336,9 @@
             </figcaption>
           </figure>
         </div>
-        <ol class="soc__list" id="socList" aria-live="polite" aria-label="Live alert feed"></ol>
+        <!-- aria-live off: ambient simulated feed updates too often to announce;
+             SR users can still navigate into this log to read it. -->
+        <ol class="soc__list" id="socList" role="log" aria-live="off" aria-label="Live alert feed"></ol>
         <p class="soc__note">
           A friendly simulation: it reacts to what you do on this page, but nothing is sent anywhere.
           The real backend-powered scoreboard arrives with the mini-CTF.

@@ -17,8 +17,14 @@ backed by a **DynamoDB** table, defined as **CloudFormation (SAM)** in
 | 2 | `terminal` | hidden terminal — `~` then `ls` → `cat .secret`       | 150 |
 | 3 | `feed`     | earned: trigger a *high* alert from the terminal      | 250 |
 
-Flag values live only in `handler.mjs`. If you change them, update the site's
-hiding spots too (index.html comment, `terminal.js`, `feed.js`).
+Only the **SHA-256 digests** of the flags live in `handler.mjs` — never the
+plaintext — so reading the Lambda source doesn't hand out the flags. The flags
+themselves are hidden on the site (index.html comment, `terminal.js`,
+`feed.js`). If you change a flag, recompute its digest:
+
+```bash
+node -e 'console.log(require("crypto").createHash("sha256").update("FLAG{...}").digest("hex"))'
+```
 
 ## Deploy (you run this — Claude can't sign in to AWS)
 

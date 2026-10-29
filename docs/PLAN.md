@@ -16,8 +16,8 @@ Get a real site live on Amplify on **day 1** so the live URL never depends on a 
 | M2 | Hidden terminal (`~`), command parser, history, tab-complete | `feat/terminal` | **done** |
 | M3 | Live SOC alert feed (Layer A), severity filter/counters/sparkline | `feat/alert-feed` | todo |
 | M4 | Backend: Lambda Function URL + DynamoDB + CloudFormation `infra/template.yaml`, mini CTF (3 flags), scoreboard | `feat/backend` | **code done · deploy = Nishen** |
-| M5 | Polish, Playwright screenshots ×5 widths, Lighthouse ≥95, CSP = 0 violations, mobile QA | `feat/polish` | todo |
-| M6 | Docs: README, HOW-IT-WORKS, SUBMISSION.md, BUILD-LOG, LinkedIn post | `feat/docs` | todo |
+| M5 | Polish, Playwright screenshots ×5 widths, Lighthouse ≥95, CSP = 0 violations, mobile QA | `feat/polish` | **code polish done · Lighthouse/screenshots = Nishen** |
+| M6 | Docs: README, HOW-IT-WORKS, SUBMISSION.md, BUILD-LOG, LinkedIn post | `feat/docs` | **done** |
 
 ## Decisions log (ponytail)
 - **M0 fonts:** system font stack (`system-ui`, `ui-monospace`) — zero weight, no CSP issue. Self-hosted JetBrains Mono + Inter added in M1. *add when: M1 design pass.*
