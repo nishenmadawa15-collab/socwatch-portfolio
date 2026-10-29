@@ -123,14 +123,17 @@ Resources:
       FunctionUrlAuthType: NONE
 
   # Public NONE-auth Function URLs on this account also need lambda:InvokeFunction
-  # granted to "*" (scoped to the NONE auth context), not just InvokeFunctionUrl.
+  # granted to "*", in addition to InvokeFunctionUrl (the console's own banner
+  # instructs granting BOTH). The lambda:FunctionUrlAuthType condition is only
+  # valid on InvokeFunctionUrl, not InvokeFunction - including it here makes AWS
+  # reject the resource with "FunctionUrlAuthType is only supported for
+  # lambda:InvokeFunctionUrl action", so it is intentionally omitted.
   CtfInvokePermission:
     Type: AWS::Lambda::Permission
     Properties:
       FunctionName: !Ref CtfFunction
       Action: lambda:InvokeFunction
       Principal: "*"
-      FunctionUrlAuthType: NONE
 
 Outputs:
   FunctionUrl:
