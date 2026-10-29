@@ -15,7 +15,7 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="styles.css">
-  <!-- FLAG{welcome_to_the_soc} — recon pays off. More hidden in the terminal (coming soon). -->
+  <!-- FLAG{welcome_to_the_soc} — recon pays off. Flag 2 lives in the terminal: press ~ then try `ls`. -->
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -55,7 +55,8 @@
             <a class="btn" href="#contact">Get in touch</a>
           </div>
           <p class="hero__hint" id="terminalHint">
-            Psst — a hidden terminal is coming to this site. For now, try <kbd>View&nbsp;Source</kbd> 👀
+            Psst — there's a hidden SOC terminal. Press <kbd>~</kbd> or
+            <button class="hero__hint-open" id="termOpen" type="button">open&nbsp;it</button> 👀
           </p>
         </div>
         <!-- Decorative 3D threat globe (WebGL, hero3d.js). Hidden from AT. -->
@@ -330,8 +331,34 @@
     </p>
   </footer>
 
+  <!-- Hidden SOC terminal (Layer B) — toggle with ` / ~ or the hero button -->
+  <div class="term" id="term" hidden>
+    <div class="term__window" role="dialog" aria-modal="true" aria-label="SOCWatch terminal" aria-describedby="termHelp">
+      <div class="term__bar">
+        <span class="term__dot term__dot--r" aria-hidden="true"></span>
+        <span class="term__dot term__dot--y" aria-hidden="true"></span>
+        <span class="term__dot term__dot--g" aria-hidden="true"></span>
+        <span class="term__name">visitor@socwatch: ~</span>
+        <button class="term__close" id="termClose" type="button" aria-label="Close terminal">esc</button>
+      </div>
+      <div class="term__screen" id="termScreen" tabindex="-1">
+        <div class="term__output" id="termOutput" role="log" aria-live="polite" aria-label="terminal output"></div>
+        <label class="term__prompt" for="termInput">
+          <span class="term__ps1" aria-hidden="true">visitor@socwatch:~$</span>
+          <input class="term__input" id="termInput" type="text" autocomplete="off"
+                 autocapitalize="off" autocorrect="off" spellcheck="false"
+                 aria-label="terminal command input">
+        </label>
+      </div>
+      <p class="term__hint" id="termHelp">
+        <kbd>help</kbd> lists commands · <kbd>Tab</kbd> completes · <kbd>↑</kbd>/<kbd>↓</kbd> history · <kbd>Esc</kbd> closes
+      </p>
+    </div>
+  </div>
+
   <script src="config.js"></script>
   <script src="script.js"></script>
+  <script src="terminal.js"></script>
   <script type="module" src="hero3d.js"></script>
 </body>
 </html>
