@@ -50,7 +50,7 @@
         }
       });
     }, { rootMargin: "-45% 0px -50% 0px" });
-    ["about", "skills", "projects", "soc", "contact"].forEach(function (id) {
+    ["about", "skills", "projects", "soc", "ctf", "contact"].forEach(function (id) {
       var sec = document.getElementById(id);
       if (sec) navObs.observe(sec);
     });

@@ -151,9 +151,10 @@
     },
     goto: function (args) {
       var map = { top: "top", hero: "top", about: "about", skills: "skills",
-                  superpowers: "skills", projects: "projects", contact: "contact" };
+                  superpowers: "skills", projects: "projects", soc: "soc",
+                  feed: "soc", ctf: "ctf", scoreboard: "ctf", contact: "contact" };
       var target = map[(args[0] || "").toLowerCase()];
-      if (!target) { print("usage: goto <about|skills|projects|contact|top>", "err"); return; }
+      if (!target) { print("usage: goto <about|skills|projects|feed|ctf|contact|top>", "err"); return; }
       var el = document.getElementById(target);
       if (!el) { print("section not found.", "err"); return; }
       print("navigating → #" + target, "muted");
@@ -189,9 +190,9 @@
       print("Scoreboard + flag submission go live in milestone M4 (Lambda + DynamoDB).", "muted");
     },
     scoreboard: function () {
-      print("Blue-Team scoreboard: OFFLINE.", "err");
-      print("Backend (AWS Lambda Function URL + DynamoDB) deploys in milestone M4.");
-      print("Nothing to rank yet — but the flags are already live. Keep hunting.", "muted");
+      print("Blue-Team scoreboard — powered by AWS Lambda + DynamoDB.");
+      print("Submit captured flags in the 'Capture the flag' section (run 'goto ctf').");
+      print("If it reads 'offline', the backend just isn't deployed yet — flags are still live.", "muted");
     },
     clear: function () { output.textContent = ""; },
     exit: function () { print("logging out…", "muted"); close(); },

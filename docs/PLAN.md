@@ -15,7 +15,7 @@ Get a real site live on Amplify on **day 1** so the live URL never depends on a 
 | M1 | Full static design: SVG radar hero, capability radar, project architecture diagrams, scanline reveals, self-hosted fonts, themes | `feat/design` | todo |
 | M2 | Hidden terminal (`~`), command parser, history, tab-complete | `feat/terminal` | **done** |
 | M3 | Live SOC alert feed (Layer A), severity filter/counters/sparkline | `feat/alert-feed` | todo |
-| M4 | Backend: Lambda Function URL + DynamoDB + CloudFormation `infra/template.yaml`, mini CTF (3 flags), scoreboard | `feat/backend` | todo |
+| M4 | Backend: Lambda Function URL + DynamoDB + CloudFormation `infra/template.yaml`, mini CTF (3 flags), scoreboard | `feat/backend` | **code done · deploy = Nishen** |
 | M5 | Polish, Playwright screenshots ×5 widths, Lighthouse ≥95, CSP = 0 violations, mobile QA | `feat/polish` | todo |
 | M6 | Docs: README, HOW-IT-WORKS, SUBMISSION.md, BUILD-LOG, LinkedIn post | `feat/docs` | todo |
 
