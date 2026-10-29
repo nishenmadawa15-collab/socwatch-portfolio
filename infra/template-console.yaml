@@ -122,6 +122,16 @@ Resources:
       Principal: "*"
       FunctionUrlAuthType: NONE
 
+  # Public NONE-auth Function URLs on this account also need lambda:InvokeFunction
+  # granted to "*" (scoped to the NONE auth context), not just InvokeFunctionUrl.
+  CtfInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref CtfFunction
+      Action: lambda:InvokeFunction
+      Principal: "*"
+      FunctionUrlAuthType: NONE
+
 Outputs:
   FunctionUrl:
     Description: Paste into config.js (backendUrl) and append to customHttp.yml connect-src.

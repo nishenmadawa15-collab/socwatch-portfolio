@@ -62,6 +62,17 @@ Resources:
             - content-type
           MaxAge: 300
 
+  # SAM's FunctionUrlConfig (AuthType NONE) auto-adds the lambda:InvokeFunctionUrl
+  # public permission. On this account a public NONE URL also needs
+  # lambda:InvokeFunction granted to "*" (scoped to the NONE auth context).
+  CtfInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref CtfFunction
+      Action: lambda:InvokeFunction
+      Principal: "*"
+      FunctionUrlAuthType: NONE
+
 Outputs:
   FunctionUrl:
     Description: Paste this into config.js (backendUrl) and append it to customHttp.yml connect-src.
