@@ -61,9 +61,29 @@
             <button class="hero__hint-open" id="termOpen" type="button">open&nbsp;it</button> 👀
           </p>
         </div>
-        <!-- Decorative 3D threat globe (WebGL, hero3d.js). Hidden from AT. -->
+        <!-- Decorative threat globe. Large screens get the WebGL animation
+             (hero3d.js, loaded by hero-boot.js). Phones/tablets, where the globe
+             is only a faint background, get the static SVG below instead, so
+             Three.js never loads there. Hidden from AT. -->
         <div class="hero__scene" id="heroScene" aria-hidden="true">
           <canvas id="heroGlobe"></canvas>
+          <svg class="hero__globe-svg" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+            <g fill="none" stroke="currentColor" stroke-width="0.7" opacity="0.85">
+              <circle cx="100" cy="100" r="78"/>
+              <ellipse cx="100" cy="100" rx="78" ry="26"/>
+              <ellipse cx="100" cy="100" rx="78" ry="52"/>
+              <ellipse cx="100" cy="72" rx="73" ry="16"/>
+              <ellipse cx="100" cy="128" rx="73" ry="16"/>
+              <ellipse cx="100" cy="100" rx="26" ry="78"/>
+              <ellipse cx="100" cy="100" rx="52" ry="78"/>
+            </g>
+            <g fill="currentColor" stroke="none">
+              <circle cx="140" cy="70" r="2.6"/>
+              <circle cx="70" cy="118" r="2"/>
+              <circle cx="118" cy="142" r="2.3"/>
+              <circle cx="84" cy="58" r="1.8"/>
+            </g>
+          </svg>
           <div class="hero__hud">
             <span class="hero__hud-item"><span class="pulse"></span>threat map · sim feed</span>
             <span class="hero__hud-item">48 sensors · 16 flows</span>
@@ -450,6 +470,6 @@
   <script src="terminal.js"></script>
   <script src="feed.js"></script>
   <script src="scoreboard.js"></script>
-  <script type="module" src="hero3d.js"></script>
+  <script src="hero-boot.js"></script>
 </body>
 </html>
