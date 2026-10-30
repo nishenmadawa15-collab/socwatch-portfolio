@@ -32,8 +32,8 @@
       <a href="#ctf">CTF</a>
       <a href="#contact">Contact</a>
     </nav>
-    <button class="nav__theme" id="themeToggle" type="button" aria-label="Toggle colour theme">
-      <span data-theme-label>Dark</span>
+    <button class="nav__theme" id="themeToggle" type="button">
+      <span class="visually-hidden">Switch theme — current: </span><span data-theme-label>Dark</span>
     </button>
   </header>
 
@@ -336,9 +336,10 @@
             </figcaption>
           </figure>
         </div>
-        <!-- aria-live off: ambient simulated feed updates too often to announce;
-             SR users can still navigate into this log to read it. -->
-        <ol class="soc__list" id="socList" role="log" aria-live="off" aria-label="Live alert feed"></ol>
+        <!-- Plain labeled list (implicit role=list keeps the <li> rows valid).
+             No role="log"/aria-live: the ambient simulated feed updates too often
+             to announce; SR users navigate into the labeled list to read it. -->
+        <ol class="soc__list" id="socList" aria-label="Live alert feed"></ol>
         <p class="soc__note">
           A friendly simulation: it reacts to what you do on this page, but nothing is sent anywhere.
           The real backend-powered scoreboard arrives with the mini-CTF.
