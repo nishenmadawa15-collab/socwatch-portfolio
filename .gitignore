@@ -19,3 +19,4 @@ docs/screenshots/*.tmp
 
 # Claude Code worktrees / local agent data
 .claude/
+evidence/
