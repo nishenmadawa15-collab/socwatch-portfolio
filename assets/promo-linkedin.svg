@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="SOCWatch — Nishen Madava Abedeera. The portfolio that watches you back. AWS Lambda, DynamoDB, Amplify.">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#223047" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="glow" cx="72%" cy="42%" r="58%">
+      <stop offset="0%" stop-color="#35e0c8" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#0a0e14" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gridMask" cx="60%" cy="42%" r="70%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="70%" stop-color="#fff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="gm"><rect width="1200" height="630" fill="url(#gridMask)"/></mask>
+    <radialGradient id="sweep" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#35e0c8" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#35e0c8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#223047" stop-opacity="0"/>
+      <stop offset="12%" stop-color="#223047" stop-opacity="1"/>
+      <stop offset="60%" stop-color="#1b8f80" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#223047" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDev="4"/>
+    </filter>
+    <style>
+      .sans{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+      .mono{font-family:ui-monospace,"Cascadia Code","Consolas",Menlo,monospace;}
+      text{fill:#e6edf3;}
+    </style>
+  </defs>
+
+  <!-- backdrop -->
+  <rect width="1200" height="630" fill="#0a0e14"/>
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.55" mask="url(#gm)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect x="2" y="2" width="1196" height="626" rx="18" fill="none" stroke="#223047" stroke-width="2" opacity="0.7"/>
+
+  <!-- top bar -->
+  <circle cx="68" cy="52" r="9" fill="#35e0c8" opacity="0.5" filter="url(#soft)"/>
+  <circle cx="68" cy="52" r="5" fill="#35e0c8"/>
+  <text x="86" y="58" class="mono" font-size="19" font-weight="700" letter-spacing="4">SOCWATCH</text>
+  <text x="1136" y="57" class="mono" font-size="13" letter-spacing="2" text-anchor="end" fill="#9aa7b8">AWS&#160;STUDENT&#160;BUILDER&#160;CHALLENGE</text>
+  <line x1="40" y1="82" x2="1160" y2="82" stroke="url(#rule)" stroke-width="1.5"/>
+
+  <!-- ===== left: identity ===== -->
+  <!-- status pill -->
+  <rect x="64" y="150" width="266" height="38" rx="19" fill="#101a24" stroke="#223047" stroke-width="1.5"/>
+  <circle cx="88" cy="169" r="9" fill="#35e0c8" opacity="0.45" filter="url(#soft)"/>
+  <circle cx="88" cy="169" r="5" fill="#35e0c8"/>
+  <text x="104" y="174" class="mono" font-size="14" letter-spacing="1.5" fill="#9aa7b8">SOC STATUS: <tspan fill="#35e0c8" font-weight="700">MONITORING</tspan></text>
+
+  <!-- name -->
+  <text x="62" y="264" class="sans" font-size="55" font-weight="800" letter-spacing="-1">Nishen Madava Abedeera</text>
+  <!-- tagline -->
+  <text x="64" y="314" class="mono" font-size="25" fill="#35e0c8">The portfolio that watches you back.</text>
+  <!-- sublines -->
+  <text x="64" y="356" class="sans" font-size="18.5" fill="#9aa7b8">BSc (Hons) Cyber Security &#183; SLTC Research University, Sri Lanka</text>
+  <text x="64" y="384" class="sans" font-size="18.5" fill="#9aa7b8">Blue team &#183; <tspan fill="#e6edf3" font-weight="600">TryHackMe Top 1%</tspan> (VoidInjector) &#183; seeking SOC internship</text>
+
+  <!-- ===== right: threat-map console panel ===== -->
+  <!-- viewfinder brackets -->
+  <g stroke="#1b8f80" stroke-width="1.6" fill="none" opacity="0.85">
+    <path d="M740 140 V120 H760"/>
+    <path d="M1116 120 H1136 V140"/>
+    <path d="M740 425 V445 H760"/>
+    <path d="M1116 445 H1136 V425"/>
+  </g>
+  <text x="756" y="151" class="mono" font-size="13" letter-spacing="2.5" fill="#35e0c8">THREAT MAP</text>
+  <circle cx="1086" cy="147" r="4" fill="#35e0c8"/>
+  <text x="1096" y="151" class="mono" font-size="12" letter-spacing="1.5" fill="#35e0c8">LIVE</text>
+
+  <!-- radar -->
+  <g>
+    <circle cx="938" cy="282" r="119" fill="none" stroke="#223047" stroke-width="1" stroke-dasharray="2 15" opacity="0.8"/>
+    <circle cx="938" cy="282" r="112" fill="#0d141d"/>
+    <circle cx="938" cy="282" r="112" fill="none" stroke="#223047" stroke-width="1.5"/>
+    <circle cx="938" cy="282" r="80" fill="none" stroke="#223047" stroke-width="1.5"/>
+    <circle cx="938" cy="282" r="46" fill="none" stroke="#223047" stroke-width="1.5"/>
+    <line x1="826" y1="282" x2="1050" y2="282" stroke="#223047" stroke-width="1.2"/>
+    <line x1="938" y1="170" x2="938" y2="394" stroke="#223047" stroke-width="1.2"/>
+    <!-- sweep wedge -->
+    <path d="M938 282 L997.3 187 A112 112 0 0 0 912.8 172.9 Z" fill="url(#sweep)"/>
+    <line x1="938" y1="282" x2="997.3" y2="187" stroke="#35e0c8" stroke-width="2.4"/>
+    <!-- blips -->
+    <circle cx="999" cy="209" r="11" fill="none" stroke="#35e0c8" stroke-width="1.3" opacity="0.5"/>
+    <circle cx="999" cy="209" r="4" fill="#35e0c8"/>
+    <circle cx="910" cy="234" r="2.4" fill="#35e0c8" opacity="0.8"/>
+    <circle cx="877" cy="317" r="2.6" fill="#35e0c8" opacity="0.7"/>
+    <circle cx="968" cy="352" r="3.4" fill="#ffb454"/>
+    <circle cx="938" cy="282" r="9" fill="#35e0c8" opacity="0.4" filter="url(#soft)"/>
+    <circle cx="938" cy="282" r="4.5" fill="#35e0c8"/>
+    <text x="1012" y="206" class="mono" font-size="11" fill="#9aa7b8">203.0.113.5</text>
+  </g>
+
+  <!-- one alert-feed row (ties radar to live feed) -->
+  <text x="756" y="424" class="mono" font-size="12.5" fill="#9aa7b8">14:07:22</text>
+  <rect x="824" y="412" width="42" height="17" rx="3.5" fill="none" stroke="#ff5c7a" stroke-width="1.2"/>
+  <text x="845" y="424" class="mono" font-size="10.5" letter-spacing="0.5" text-anchor="middle" fill="#ff5c7a">HIGH</text>
+  <text x="876" y="424" class="mono" font-size="12.5"><tspan fill="#9aa7b8">203.0.113.5</tspan>  ssh brute-force &#183; <tspan fill="#35e0c8">blocked</tspan></text>
+
+  <!-- ===== bottom band ===== -->
+  <line x1="40" y1="462" x2="1160" y2="462" stroke="url(#rule)" stroke-width="1.5"/>
+
+  <!-- stack -->
+  <text x="64" y="498" class="mono" font-size="12" letter-spacing="3.5" fill="#9aa7b8">STACK</text>
+  <text x="64" y="528" class="mono" font-size="23" font-weight="700">AWS Lambda <tspan fill="#1b8f80">&#183;</tspan> DynamoDB <tspan fill="#1b8f80">&#183;</tspan> Amplify</text>
+  <text x="64" y="556" class="mono" font-size="14" fill="#9aa7b8">serverless &#183; vanilla HTML/CSS/JS &#183; no build step &#183; A+ security headers / zero-inline CSP</text>
+
+  <!-- feature chips -->
+  <g class="mono" font-size="14">
+    <rect x="641" y="503" width="150" height="34" rx="17" fill="#101a24" stroke="#223047" stroke-width="1.3"/>
+    <text x="716" y="525" text-anchor="middle" fill="#e6edf3">live alert feed</text>
+    <rect x="799" y="503" width="178" height="34" rx="17" fill="#101a24" stroke="#223047" stroke-width="1.3"/>
+    <text x="888" y="525" text-anchor="middle">hidden terminal <tspan fill="#35e0c8">~</tspan></text>
+    <rect x="985" y="503" width="151" height="34" rx="17" fill="#101a24" stroke="#223047" stroke-width="1.3"/>
+    <text x="1060" y="525" text-anchor="middle">3-flag mini-CTF</text>
+  </g>
+</svg>
