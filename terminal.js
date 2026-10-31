@@ -187,12 +187,12 @@
         "  [2] right here in the terminal (you're warm — try 'ls', then 'cat')",
         "  [3] earned, not given          (arrives with the alert feed)"
       ].join("\n"));
-      print("Scoreboard + flag submission go live in milestone M4 (Lambda + DynamoDB).", "muted");
+      print("Scoreboard + flag submission are live, scored on AWS Lambda + DynamoDB.", "muted");
     },
     scoreboard: function () {
       print("Blue-Team scoreboard — powered by AWS Lambda + DynamoDB.");
       print("Submit captured flags in the 'Capture the flag' section (run 'goto ctf').");
-      print("If it reads 'offline', the backend just isn't deployed yet — flags are still live.", "muted");
+      print("If it ever reads 'unreachable', the backend's just catching its breath — flags stay live.", "muted");
     },
     clear: function () { output.textContent = ""; },
     exit: function () { print("logging out…", "muted"); close(); },

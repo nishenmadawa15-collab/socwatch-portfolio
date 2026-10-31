@@ -19,7 +19,7 @@ The whole thing is plain HTML/CSS/JS — no frameworks, no build step — under 
 
 Built in the open, deploy-first, paired with Claude Code — architecture, security review and AWS deployment done by me.
 
-👉 Find the flags: [LIVE URL]
+👉 Find the flags: https://main.d2e99c40tngdmx.amplifyapp.com
 💻 Source: github.com/nishenmadawa15-collab/socwatch-portfolio
 
 #AWS #CyberSecurity #CloudComputing #SOC #Serverless #StudentBuilder #BlueTeam
@@ -39,7 +39,7 @@ For the AWS Student Builder Challenge I shipped **SOCWatch** — a portfolio the
 
 Deploy-first and built in the open: live on day one, each feature merged and auto-deployed.
 
-Try the CTF 👉 [LIVE URL]
+Try the CTF 👉 https://main.d2e99c40tngdmx.amplifyapp.com
 Code 👉 github.com/nishenmadawa15-collab/socwatch-portfolio
 
 Open to SOC Analyst / Penetration Testing internships in Sri Lanka. 🇱🇰

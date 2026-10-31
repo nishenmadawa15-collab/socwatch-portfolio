@@ -1,5 +1,10 @@
 # Deploy the CTF backend from the AWS Console
 
+> ✅ **Already deployed and live** (region `ap-south-1`, stack `socwatch-ctf`).
+> Function URL: `https://nr2zhakzbok6og27sg7gi6miha0czazx.lambda-url.ap-south-1.on.aws/`
+> — already wired into [`config.js`](../config.js) and [`customHttp.yml`](../customHttp.yml).
+> The steps below are the reproducible procedure for redeploying from scratch.
+
 No SAM CLI, no local credentials — just the console you're already signed into.
 This deploys the whole backend (DynamoDB + Lambda + public Function URL + IAM)
 from one template: [`infra/template-console.yaml`](../infra/template-console.yaml).
